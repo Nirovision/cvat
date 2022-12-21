@@ -43,7 +43,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="cvat-cli",
+    name="nirovision-cvat-cli",
     version=find_version(project_dir="src/cvat_cli"),
     description="Command-line client for CVAT",
     long_description=long_description,

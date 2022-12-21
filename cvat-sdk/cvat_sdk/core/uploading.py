@@ -94,6 +94,8 @@ class _MyTusUploader(_TusUploader):
         if url is None:
             msg = "Attempt to retrieve create file url with status {}".format(resp.status_code)
             raise tus_uploader.TusCommunicationError(msg, resp.status_code, resp.content)
+        if self.client.url.startswith("https://") and url.startswith("http://"):
+            url = url.replace("http://", "https://")
         return tus_uploader.urljoin(self.client.url, url)
 
     @tus_uploader._catch_requests_error
