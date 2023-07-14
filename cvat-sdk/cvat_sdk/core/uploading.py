@@ -92,6 +92,8 @@ class _MyTusUploader(_TusUploader):
         resp = self._api_client.rest_client.POST(self.client.url, headers=headers)
         self.real_filename = resp.headers.get("Upload-Filename")
         url = resp.headers.get("location")
+        if self.client.url.startswith("https://") and url.startswith("http://"):
+            url = url.replace("http://", "https://", 1)
         if url is None:
             msg = "Attempt to retrieve create file url with status {}".format(resp.status_code)
             raise tus_uploader.TusCommunicationError(msg, resp.status_code, resp.content)
